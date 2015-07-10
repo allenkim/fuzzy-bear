@@ -3,6 +3,10 @@ var playState = {
 	create: function() { 
         
         this.createWorld();
+
+        this.gameMusic = game.add.audio('gameMusic');
+        this.gameMusic.play();
+        this.gameMusic.loop = true;
         
         this.explosions = game.add.group();
         for (var i = 0; i < 30; i++){
@@ -116,6 +120,7 @@ var playState = {
     },
 
     quitGame: function(){
+        this.gameMusic.stop();
         game.state.start('menu');
     }
 };

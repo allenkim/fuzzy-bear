@@ -4,6 +4,10 @@ var playState = {
         
         this.createWorld();
 
+        this.counter = 0;
+        this.counterText = game.add.text(10,10,'Time Survived: 0 seconds',{font: '20px Arial', fill: '#ffffff'});
+        this.timerLoop = game.time.events.loop(1000,this.updateTime,this);
+
         this.gameMusic = game.add.audio('gameMusic');
         this.gameMusic.play();
         this.gameMusic.loop = true;
@@ -54,6 +58,10 @@ var playState = {
             this.nextTeddy = game.time.now + this.cooldownTime;
         }
 	},
+
+    updateTime: function() {
+        this.counterText.setText('Time Survived: ' + (this.counter++) + ' seconds');
+    },
 
     createRandomTeddy: function(){
         var teddy = this.teddies.getFirstExists(false);
@@ -115,6 +123,9 @@ var playState = {
         explosionAnimation.play('explosion',30,false,true);
         skull.kill();
         skullKiller.kill();
+
+        game.global.score = this.counter;
+        game.time.events.remove(this.timerLoop);
 
         game.time.events.add(2000, this.quitGame, this);
     },

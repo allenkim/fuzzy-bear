@@ -9,12 +9,24 @@ var menuState = {
         this.menuMusic.play();
         this.menuMusic.loop = true;
 
+        if (!localStorage.getItem('bestScore')) {
+            localStorage.setItem('bestScore', 0);
+        }
+        
+        if (game.global.score > localStorage.getItem('bestScore')) {
+            localStorage.setItem('bestScore', game.global.score);   
+        }
+
+        var text = 'Score: ' + game.global.score + ' seconds\nHigh score: ' + localStorage.getItem('bestScore') + ' seconds';
+        var scoreLabel = game.add.text(game.world.centerX, game.world.centerY-30, text, { font: '25px Arial', fill: '#ffffff', align: 'center' });
+        scoreLabel.anchor.setTo(0.5, 0.5);
+
         var nameLabel = game.add.text(game.world.centerX,-50,'Fuzzy Bear',{font: '50px Geo', fill: '#ffffff'});
         nameLabel.anchor.setTo(0.5, 0.5);
         
         game.add.tween(nameLabel).to({y:200},1500).easing(Phaser.Easing.Bounce.Out).start();
-        
-        var startLabel = game.add.text(game.world.centerX, game.world.height-300,
+
+        var startLabel = game.add.text(game.world.centerX, game.world.height-200,
             'Press the UP arrow key to start', 
             { font: '25px Arial', fill: '#ffffff' });
         startLabel.anchor.setTo(0.5, 0.5);

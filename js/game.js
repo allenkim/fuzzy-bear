@@ -1,5 +1,9 @@
 var game = new Phaser.Game(800,608,Phaser.AUTO,'gameDiv');
 
+game.global = {
+	score: 0
+};
+
 // Add all the states 
 game.state.add('boot', bootState);
 game.state.add('load', loadState);

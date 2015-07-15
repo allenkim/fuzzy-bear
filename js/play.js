@@ -83,6 +83,23 @@ var playState = {
     },
     
     skullUpdate: function() {
+        // if (this.cursor.left.isDown && this.cursor.right.isDown && this.cursor.down.isDown && this.cursor.up.isDown){
+        //     this.skull.body.velocity.x = 0;
+        //     this.skull.body.velocity.y = 0;
+        // }
+        // else if (this.cursor.right.isDown && this.cursor.left.isDown && this.cursor.up.isDown){
+        //     this.skull.body.velocity.y = -this.skullSpeed;
+        // }
+        // else if (this.cursor.right.isDown && this.cursor.left.isDown && this.cursor.down.isDown){
+        //     this.skull.body.velocity.y = this.skullSpeed;
+        // }
+        // else if (this.cursor.right.isDown && this.cursor.down.isDown && this.cursor.up.isDown){
+        //     this.skull.body.velocity.x = this.skullSpeed;
+        // }
+        // else if (this.cursor.left.isDown && this.cursor.down.isDown && this.cursor.up.isDown){
+        //     this.skull.body.velocity.x = -this.skullSpeed;
+        // }
+        
         if (this.cursor.left.isDown && this.cursor.up.isDown){
             this.skull.body.velocity.x = -this.skullSpeed/Math.sqrt(2);
             this.skull.body.velocity.y = -this.skullSpeed/Math.sqrt(2);

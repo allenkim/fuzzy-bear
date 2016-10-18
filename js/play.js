@@ -51,9 +51,6 @@ var playState = {
         this.cooldownTime = 400;
 
         this.nextTeddy = 0;
-				this.nextNeuralCheck = 0;
-
-				this.neuralCooldown = 10;
 
 				// note that left bound = 172.7
 				// right bound = 627.3
@@ -78,23 +75,22 @@ var playState = {
 						location = 0;
 					else if (this.skull.x > this.rightBound - this.spriteDimension)
 						location = 1;
-					if (diff < 70){
+					if (diff < 50){
 						this.skull.body.velocity.x = this.skullSpeed * 2 * (myPerceptron.activate([diffX,diffY,location]) - 0.5);
 					}
-					if (this.nextNeuralCheck < game.time.now){
-						var sample = {};
-						sample.input = [diffX,diffY,location];
-						if (diff < 70){
-							if (location != 0.5 && diffX < this.spriteDimension && diffX > -this.spriteDimension)
-								sample.output = [1-location];
-							else if (diffX > 0)
-								sample.output = [0];
-							else
-								sample.output = [1];
-							trainingSet.push(sample);
-						}
 
-						this.nextNeuralCheck = game.time.now + this.neuralCooldown;
+					var sample = {};
+					sample.input = [diffX,diffY,location];
+					if (diff < 50){
+						if (location == 0 && diffX > 0 && diffX < this.spriteDimension)
+							sample.output = [1];
+						else if (location == 1 && diffX < 0 && diffX > -this.spriteDimension)
+							sample.output = [0];
+						else if (diffX > 0)
+							sample.output = [0];
+						else
+							sample.output = [1];
+						trainingSet.push(sample);
 					}
 				},this);
 	},
